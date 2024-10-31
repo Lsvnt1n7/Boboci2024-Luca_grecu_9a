@@ -48,18 +48,18 @@ import static org.firstinspires.ftc.teamcode.drive.robot.DriveConstants.TRACK_WI
 import static org.firstinspires.ftc.teamcode.drive.robot.DriveConstants.encoderTicksToInches;
 import static org.firstinspires.ftc.teamcode.drive.robot.DriveConstants.kA;
 import static org.firstinspires.ftc.teamcode.drive.robot.DriveConstants.kStatic;
-import static org.firstinspires.ftc.teamcode.drive.robot.DriveConstants.kV;
+import static org.firstinspires.ftc.teamcode.drive.robot.DriveConstants.kV; //importeaza biblioteci (toate)
 
 @Config
 public class  SampleMecanumDrive extends MecanumDrive {
     public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 0);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(0, 0, 0);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(0, 0, 0);// seteaza coeficientii traiectoriei de mers
 
     public static double LATERAL_MULTIPLIER = 1;
 
     public static double VX_WEIGHT = 1;
     public static double VY_WEIGHT = 1;
-    public static double OMEGA_WEIGHT = 1;
+    public static double OMEGA_WEIGHT = 1; 
 
     private TrajectorySequenceRunner trajectorySequenceRunner;
 
