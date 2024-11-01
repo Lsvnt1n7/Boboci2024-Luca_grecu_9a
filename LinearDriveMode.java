@@ -9,30 +9,31 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 
 
-import org.firstinspires.ftc.teamcode.drive.robot.Robot;
+import org.firstinspires.ftc.teamcode.drive.robot.Robot; // importeaza biblioteci
 
-@TeleOp(name="MecanumDriveMode", group="Linear OpMode")
+@TeleOp(name="MecanumDriveMode", group="Linear OpMode") //declara clasa TeleOp
 
 public class LinearDriveMode extends LinearOpMode {
-    private Robot robot = null;
+    private Robot robot = null; // declara robotul care cuprinde piesele
     int direction = 1; 
     double servoPosSlides = 0.5;
     double servoPosGrippy = 0;
+    //seteaza variabilelel initiale ale servourilor si a directiei
     public double calculateThrottle(float x) {
         int sign = -1;
         if (x > 0) sign = 1;
         return sign * 3 * abs(x);
-    }
+    } // lucreaza datele primite din controller
 
     @Override
     public void runOpMode() throws InterruptedException {
-        telemetry.addData(">", "Initializing...");
+        telemetry.addData(">", "Initializing..."); //adauga un mesaj
         telemetry.update();
 
-        robot = new Robot(hardwareMap);
+        robot = new Robot(hardwareMap); // robotul intra in hardware map
         while (robot.isInitialize() && opModeIsActive()) {
             idle();
-        }
+        } // nu face nimic pana nu e gata 100%
 
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         telemetry.addData(">", "Initialized");
