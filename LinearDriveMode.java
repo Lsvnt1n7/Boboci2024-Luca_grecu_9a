@@ -35,52 +35,52 @@ public class LinearDriveMode extends LinearOpMode {
             idle();
         } // nu face nimic pana nu e gata 100%
 
-        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
-        telemetry.addData(">", "Initialized");
+        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry()); // telemetria e in dashboard
+        telemetry.addData(">", "Initialized"); // cand e gata 100% afiseaza 
         telemetry.update();
 
 
 
-        waitForStart();
-        if (isStopRequested()) return;
+        waitForStart(); // asteapta startul
+        if (isStopRequested()) return; // opreste daca se cere 
 
 
-        while (opModeIsActive()) {
+        while (opModeIsActive()) { // cat timp este activ  modul op
 
 
 
-            if (gamepad2.left_bumper) {
-                robot.crane.slidesDirection = 1;
-                robot.crane.setSlides(5);
+            if (gamepad2.left_bumper) { //daca L1 este apasat pe controller 2
+                robot.crane.slidesDirection = 1; // misca bratul pozitiv
+                robot.crane.setSlides(5); // puterea bratului*
                 if(robot.crane.slideEncoderLastPosition > robot.crane.slideEncoder.getVoltage()){
                     robot.crane.slideExtension -= 3.3;
                 }
-            } else if (gamepad2.right_bumper) {
-                robot.crane.slidesDirection = -1;
-                robot.crane.setSlides(5);
+            } else if (gamepad2.right_bumper) { //daca R1 este apasat pe controller 2
+                robot.crane.slidesDirection = -1; // misca bratul negativ
+                robot.crane.setSlides(5); // puterea bratului
                 if(robot.crane.slideEncoderLastPosition < robot.crane.slideEncoder.getVoltage()){
                     robot.crane.slideExtension += 3.3;
                 }
             } else {
-               robot.crane.setSlides(0);
+               robot.crane.setSlides(0); //daca nu este nmk apasat opreste extenisa
             }
             robot.crane.slideEncoderLastPosition = robot.crane.slideEncoder.getVoltage();
 
 
-            if(gamepad2.left_trigger > 0.1){
+            if(gamepad2.left_trigger > 0.1){ // daca L2 este apasat
                 robot.crane.craneTarget -= (int) calculateThrottle(gamepad2.left_trigger);
             }
-            else if(gamepad2.right_trigger > 0.1){
+            else if(gamepad2.right_trigger > 0.1){ // altfel daca R2 este apasat
                 robot.crane.craneTarget += (int) calculateThrottle(gamepad2.right_trigger);
             }
             robot.crane.motorCrane1.setPower(robot.crane.cranePower(robot.crane.craneTarget));
             robot.crane.motorCrane2.setPower(robot.crane.cranePower(robot.crane.craneTarget));
 
-            if (gamepad2.a) {
+            if (gamepad2.a) { //daca este abasat X de pe controller2
                 robot.crane.gripperDirection = 1;
                 robot.crane.setGripper(1);
             }
-            else if (gamepad2.b) {
+            else if (gamepad2.b) { // daca este apasat *cerc* de pe controller2
                 robot.crane.gripperDirection = -1;
                 robot.crane.setGripper(1);
             }
